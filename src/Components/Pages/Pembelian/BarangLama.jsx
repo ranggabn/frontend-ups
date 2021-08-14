@@ -26,6 +26,8 @@ export default function BarangLama() {
     nama: "",
     stok: "",
     tanggal_beli: "",
+    stoklama: "",
+    stokbaru: ""
   });
   const [databaru, setdatabaru] = useState({
     kode: "",
@@ -70,28 +72,27 @@ export default function BarangLama() {
     e.preventDefault();
   }
 
-  let newstok;
-  function handle(e) {
-    const newData = { ...data };
-    newData[e.target.name] = e.target.value;
-    setdata(newData);
-    newstok = parseInt(databaru.stok,10) + parseInt(newData.stok,10)
-    setdatabaru({...newData, stok:newstok})
-    console.log(newstok);
-  }
-
   const handleChange = (e) => {    
     setdata({
       nama: e.value,
-      kode: e.kode
+      kode: e.kode,
+      stoklama: e.stok
     });
     setdatabaru({
       kode: e.kode,
       nama: e.value,
-      stok: e.stok + data.stok
     })
-    console.log(data.stok);
   };
+
+  let newstok;
+  function handle(e) {
+    const newData = { ...data };
+    newData[e.target.name] = e.target.value;
+    newstok = parseInt(newData.stok) + parseInt(data.stoklama)
+    setdata({...newData, stokbaru:newstok})
+    setdatabaru({...newData, stok:newstok})
+    console.log(databaru.stok);
+  }
 
   if (!state.isAuthenticated) {
     return <Redirect to="/masuk" />;
@@ -118,6 +119,28 @@ export default function BarangLama() {
                 />
               </Col>
             </Row>
+          </FormGroup>
+          <FormGroup>
+            <Label for="stoklama">Stok Lama</Label>
+            <Input
+              type="number"
+              name="stoklama"
+              id="stoklama"
+              value={data.stoklama}
+              onChange={(e) => handle(e)}
+              disabled
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label for="stokbaru">Stok Baru</Label>
+            <Input
+              type="number"
+              name="stokbaru"
+              id="stokbaru"
+              value={data.stokbaru}
+              onChange={(e) => handle(e)}
+              disabled
+            />
           </FormGroup>
           <FormGroup>
             <Label for="stok">Jumlah Pembelian</Label>

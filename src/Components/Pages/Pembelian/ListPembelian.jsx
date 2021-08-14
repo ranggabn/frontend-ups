@@ -20,6 +20,7 @@ export default function ListPembelian() {
   }, []);
 
   function remove(id_pembelian) {
+    // console.log(id);
     const data = qs.stringify({ id_pembelian: id_pembelian });
     axios
       .delete(api + "/hapusPembelian", {
@@ -28,7 +29,9 @@ export default function ListPembelian() {
       })
       .then((res) => {
         console.log(res.data.values);
-        const newData = barang.filter((barang) => barang.id_pembelian !== id_pembelian);
+        const newData = barang.filter(
+          (barang) => barang.id_pembelian !== id_pembelian
+        );
         setbarang(newData);
       })
       .catch((err) => console.error(err));

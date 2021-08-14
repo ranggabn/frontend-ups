@@ -46,7 +46,7 @@ export default function Toko() {
 
   useEffect(() => {
     axios.get(api + "/tampilBarang").then((res) => {
-      setbarang(res.data.values);
+      setbarang(res.data.values);      
     });
     setdataKeranjang({
       tanggal: moment().format(),
@@ -117,6 +117,13 @@ export default function Toko() {
       .catch((err) => console.error(err));
   }
 
+  const arr = [];
+  tampilkeranjang.map((lb) =>
+    arr.push({
+      kode: lb.kode,
+      stok: lb.stok - lb.jumlah
+    })
+  );
   function handleSubmit(e) {
     e.preventDefault();
     tampilkeranjang.map(
@@ -130,11 +137,15 @@ export default function Toko() {
         timer: 1200,
       })
     );
+    arr.map(arr => axios.put(api + "/ubahBarang3", arr))
     remove();
     getListKeranjang();
   }
 
   const getListKeranjang = () => {
+    axios.get(api + "/tampilBarang").then((res) => {
+      setbarang(res.data.values);      
+    });
     axios.get(api + "/tampilKeranjang").then((res) => {
       settampilkeranjang(res.data.values);
     });
@@ -211,7 +222,11 @@ export default function Toko() {
                   .filter((barang) => {
                     if (searchTerm === "") {
                       return barang;
-                    } else if (barang.nama.toLowerCase().includes(searchTerm.toLowerCase())) {
+                    } else if (
+                      barang.nama
+                        .toLowerCase()
+                        .includes(searchTerm.toLowerCase())
+                    ) {
                       return barang;
                     }
                   })
