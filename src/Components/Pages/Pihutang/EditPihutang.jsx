@@ -66,7 +66,7 @@ export default function EditPihutang(props) {
   if (data) {
     return (
       <Container className="mt-5">
-        <h4>Formulir Edit Data Pihutang</h4>
+        <h4>Formulir Edit Data Piutang</h4>
         <hr />
         <Form className="form" onSubmit={submit}>
           <Col>

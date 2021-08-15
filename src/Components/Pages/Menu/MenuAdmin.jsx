@@ -28,7 +28,10 @@ const NavbarComp = (props) => {
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar>
               <NavItem>
-                <NavLink href="/toko">Toko</NavLink>
+                <NavLink href="/toko">Kasir Normal</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="/tokobengkel">Kasir Bengkel</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="/listbarang">Barang</NavLink>
@@ -37,7 +40,7 @@ const NavbarComp = (props) => {
                 <NavLink href="/listhutang">Hutang</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/listpihutang">Pihutang</NavLink>
+                <NavLink href="/listpihutang">Piutang</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="/listjual">Penjualan</NavLink>
@@ -47,6 +50,7 @@ const NavbarComp = (props) => {
               </NavItem>
             </Nav>
             <NavbarText>
+            <Button className="mr-3" href="/profil">Ubah Password</Button>
             <Button onClick={() => dispatch({ type: "LOGOUT" })} href="/masuk">Keluar</Button>
           </NavbarText>
           </Collapse>

@@ -28,6 +28,7 @@ export default function BarangBaru() {
     diskon: "",
     modal: "",
     jual: "",
+    bengkel: "",
     tanggal_beli: "",
   });
 
@@ -53,6 +54,7 @@ export default function BarangBaru() {
           diskon: "",
           modal: "",
           jual: "",
+          bengkel: "",
           tanggal_beli: "",
         });
       })
@@ -153,12 +155,24 @@ export default function BarangBaru() {
             />
           </FormGroup>
           <FormGroup>
-            <Label for="jual">Harga Jual</Label>
+            <Label for="jual">Harga Normal</Label>
             <Input
               type="number"
               name="jual"
               id="jual"
               value={data.jual}
+              placeholder="Rp. "
+              onChange={(e) => handle(e)}
+              required
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label for="bengkel">Harga Bengkel</Label>
+            <Input
+              type="number"
+              name="bengkel"
+              id="bengkel"
+              value={data.bengkel}
               placeholder="Rp. "
               onChange={(e) => handle(e)}
               required

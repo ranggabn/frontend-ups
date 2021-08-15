@@ -16,6 +16,8 @@ import BarangLama from "./Components/Pages/Pembelian/BarangLama";
 import Home from "./Components/Pages/Home/Home";
 import MenuComp from "./Components/Pages/Menu/MenuComp";
 import Masuk from "./Components/Pages/Masuk/Masuk";
+import TokoBengkel from "./Components/Pages/Toko Bengkel/TokoBengkel";
+import Profil from "./Components/Pages/Profil/Profil";
 
 export const AuthContext = createContext();
 
@@ -62,7 +64,9 @@ function App() {
         <AuthContext.Provider value={{ state, dispatch }}>
           <MenuComp />
           <Route exact path="/" component={Home} />
+          <Route exact path="/profil" component={Profil} />
           <Route exact path="/toko" component={Toko} />
+          <Route exact path="/tokobengkel" component={TokoBengkel} />
           <Route exact path="/masuk" component={Masuk} />
           <Route exact path="/listhutang" component={ListHutang} />
           <Route exact path="/listpihutang" component={ListPihutang} />

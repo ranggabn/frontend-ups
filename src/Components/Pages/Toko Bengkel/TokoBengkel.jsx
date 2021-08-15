@@ -16,11 +16,11 @@ import swal from "sweetalert";
 import moment from "moment";
 import { AuthContext } from "../../../App";
 import { Redirect } from "react-router";
-import ModalKeranjang from "./ModalKeranjang";
+import ModalKeranjang from "./ModalKeranjang2";
 
 const api = "http://localhost:3001";
 
-export default function Toko() {
+export default function TokoBengkel() {
   const { state } = useContext(AuthContext);
   const [barang, setbarang] = useState([]);
   const [data, setdata] = useState({
@@ -65,7 +65,7 @@ export default function Toko() {
             ...dataKeranjang,
             kode: response.kode,
             jumlah: 1,
-            total: response.jual,
+            total: response.bengkel,
             tanggal: moment().format(),
           };
           setdataKeranjang(dataKer);
@@ -85,7 +85,7 @@ export default function Toko() {
           const dataKer = {
             ...dataKeranjang,
             kode: response.kode,
-            total: res.data.values[0].total + response.jual,
+            total: res.data.values[0].total + response.bengkel,
             jumlah: res.data.values[0].jumlah + 1,
           };
           axios.put(api + "/ubahKeranjang", dataKer).then((res) => {
@@ -185,7 +185,7 @@ export default function Toko() {
         <Row className="mt-5">
           <Col>
             <h4 className="text-center">
-              <b>PENJUALAN NORMAL</b>
+              <b>PENJUALAN KHUSUS BENGKEL</b>
             </h4>
           </Col>
         </Row>
@@ -213,7 +213,7 @@ export default function Toko() {
                   <th>Kode</th>
                   <th>Nama Barang</th>
                   <th>Stok</th>
-                  <th>Harga Normal</th>
+                  <th>Harga Bengkel</th>
                   <th>Aksi</th>
                 </tr>
               </thead>
@@ -235,7 +235,7 @@ export default function Toko() {
                       <td>{barang.kode}</td>
                       <td>{barang.nama}</td>
                       <td>{barang.stok}</td>
-                      <td>Rp. {numberWithCommas(barang.jual)}</td>
+                      <td>Rp. {numberWithCommas(barang.bengkel)}</td>
                       <td>
                         <Button
                           color="primary"
@@ -272,7 +272,7 @@ export default function Toko() {
                   </Col>
                   <Col>
                     <h5>{tamker.nama}</h5>
-                    <p>Rp. {numberWithCommasString(tamker.jual)}</p>
+                    <p>Rp. {numberWithCommasString(tamker.bengkel)}</p>
                   </Col>
                   <Col xs="4.5">
                     <strong>

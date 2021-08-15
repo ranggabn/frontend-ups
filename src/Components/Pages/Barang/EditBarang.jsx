@@ -151,7 +151,7 @@ export default function EditBarang(props) {
                 </Col>
               </Row>
             </FormGroup>
-            <Label>Harga Jual</Label>
+            <Label>Harga Normal</Label>
             <FormGroup>
               <Row>
                 <Col>
@@ -159,6 +159,20 @@ export default function EditBarang(props) {
                     type="number"
                     name="jual"
                     value={data.jual}
+                    onChange={(e) => handle(e)}
+                    required
+                  />
+                </Col>
+              </Row>
+            </FormGroup>
+            <Label>Harga Bengkel</Label>
+            <FormGroup>
+              <Row>
+                <Col>
+                  <Input
+                    type="number"
+                    name="bengkel"
+                    value={data.bengkel}
                     onChange={(e) => handle(e)}
                     required
                   />

@@ -73,7 +73,7 @@ export default function TambahPihutang() {
       <Row>
         <Col>
           <h3 className="text-center mb-5">
-            <b>FORMULIR PIHUTANG</b>
+            <b>FORMULIR PIUTANG</b>
           </h3>
         </Col>
       </Row>

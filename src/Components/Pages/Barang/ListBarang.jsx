@@ -58,7 +58,7 @@ export default function ListBarang(props) {
       <Table className="table-bordered mt-3">
         <thead>
           <tr>
-            <th colSpan="8" className="text-center" bgcolor="#BABABA">
+            <th colSpan="9" className="text-center" bgcolor="#BABABA">
               <h5>
                 <b>Rincian Barang</b>
               </h5>
@@ -71,7 +71,8 @@ export default function ListBarang(props) {
             <th>Pricelist</th>
             <th>Diskon</th>
             <th>Harga Modal</th>
-            <th>Harga Jual</th>
+            <th>Harga Normal</th>
+            <th>Harga Bengkel</th>
             <th>Keterangan</th>
           </tr>
         </thead>
@@ -91,6 +92,7 @@ export default function ListBarang(props) {
               <td>{barang.diskon} %</td>
               <td>Rp. {numberWithCommas(barang.modal)}</td>
               <td>Rp. {numberWithCommas(barang.jual)}</td>
+              <td>Rp. {numberWithCommas(barang.bengkel)}</td>
               <td>
                 <Button color="secondary" onClick={() => update(barang.kode)}>
                   Edit

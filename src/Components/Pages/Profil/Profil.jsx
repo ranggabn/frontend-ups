@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useState } from "react";
+import React, { Fragment, useEffect, useContext, useState } from "react";
 import axios from "axios";
 import {
   Container,
@@ -8,25 +8,33 @@ import {
   Row,
   Col,
   Card,
-  Button,  
+  Button,
   Form,
 } from "reactstrap";
 import { AuthContext } from "../../../App";
+import { Redirect } from "react-router";
 
 const qs = require("querystring");
 const api = "http://localhost:3001";
 
-export default function Masuk(props) {
-  const { dispatch } = useContext(AuthContext);
+export default function Profil() {
+  const { state } = useContext(AuthContext);
 
   const initialState = {
-    username: "",
-    password: "",
-    isSubmitting: false,
+    username: state.user,
+    currpassword: "",
+    newpassword: "",
     errorMessage: null,
+    successMessage: null,
   };
 
   const [data, setData] = useState(initialState);
+
+  useEffect(() => {
+      setData({
+          username: state.user
+      })
+  }, [])
 
   const handleInputChange = (event) => {
     setData({
@@ -39,13 +47,14 @@ export default function Masuk(props) {
     event.preventDefault();
     setData({
       ...data,
-      isSubmitting: true,
       errorMessage: null,
+      successMessage: null,
     });
 
     const requestBody = {
-      username: data.username,
-      password: data.password,
+      username: state.user,
+      currpassword: data.currpassword,
+      newpassword: data.newpassword,
     };
 
     const config = {
@@ -55,34 +64,40 @@ export default function Masuk(props) {
     };
 
     axios
-      .post(api + "/auth/api/v1/login", qs.stringify(requestBody), config)
+      .post(
+        api + "/auth/api/v1/ubahpassword",
+        qs.stringify(requestBody),
+        config
+      )
       .then((res) => {
         if (res.data.success === true) {
-          dispatch({
-            type: "LOGIN",
-            payload: res.data,
+          setData({
+            currpassword: "",
+            newpassword: "",
+            successMessage: res.data.message,
+            errorMessage: null,
           });
-
-          props.history.push("/toko");
         } else {
           setData({
             ...data,
-            isSubmitting: false,
-            errorMessage: res.data.Message,
+            errorMessage: res.data.message,
+            successMessage: null,
           });
         }
-
         throw res;
       });
   };
 
+  if (!state.isAuthenticated) {
+    return <Redirect to="/masuk" />;
+  }
   return (
     <Fragment>
       <Container className="mt-5">
         <Row>
           <Col>
             <h3 className="text-center">
-              <b>MASUK</b>
+              <b>Ubah Password</b>
             </h3>
           </Col>
         </Row>
@@ -99,37 +114,54 @@ export default function Masuk(props) {
                         name="username"
                         value={data.username}
                         onChange={handleInputChange}
-                        name="username"
                         id="exampleUsername"
-                        required
+                        disabled
                       />
                     </Col>
                   </Row>
                 </FormGroup>
-                <Label>Kata Sandi</Label>
+                <Label>Password Lama</Label>
                 <FormGroup>
                   <Row>
                     <Col>
                       <Input
                         type="password"
-                        name="password"
-                        value={data.password}
+                        name="currpassword"
+                        value={data.currpassword}
                         onChange={handleInputChange}
-                        name="password"
-                        id="examplePassword"
+                        id="exampleCurrpassword"
                         required
                       />
                     </Col>
                   </Row>
                 </FormGroup>
-
+                <Label>Password Baru</Label>
+                <FormGroup>
+                  <Row>
+                    <Col>
+                      <Input
+                        type="password"
+                        name="newpassword"
+                        value={data.newpassword}
+                        onChange={handleInputChange}
+                        id="exampleNewpassword"
+                        required
+                      />
+                    </Col>
+                  </Row>
+                </FormGroup>
+                {data.successMessage && (
+                  <div className="alert alert-success" role="alert">
+                    {data.successMessage}
+                  </div>
+                )}
                 {data.errorMessage && (
                   <div className="alert alert-danger" role="alert">
                     {data.errorMessage}
                   </div>
                 )}
-                <Button color="primary" className="mb-3" disabled={data.isSubmitting}>
-                  {data.isSubmitting ? "...loading" : "Masuk"}
+                <Button color="primary" className="mb-3" type="submit">
+                  Simpan
                 </Button>
               </Form>
             </Col>

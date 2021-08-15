@@ -48,14 +48,14 @@ export default function ListPihutang(props) {
   }
   return (
     <Container className="mt-5">
-      <h2>PIHUTANG</h2>
+      <h2>PIUTANG</h2>
       <hr />
       <Button
         color="success"
         href="/tambahpihutang"
         className="mt-1 mb-3 float-right"
       >
-        Tambah Catatan Pihutang
+        Tambah Catatan Piutang
       </Button>
       <Input
         type="text"
@@ -69,13 +69,13 @@ export default function ListPihutang(props) {
           <tr>
             <th colSpan="6" className="text-center" bgcolor="#BABABA">
               <h5>
-                <b>Rincian Pihutang</b>
+                <b>Rincian Piutang</b>
               </h5>
             </th>
           </tr>
           <tr>
             <th>Nama Toko</th>
-            <th>Jumlah Hutang</th>
+            <th>Jumlah Piutang</th>
             <th>List Barang</th>
             <th>Tanggal</th>
             <th>Status</th>
