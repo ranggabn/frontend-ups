@@ -15,8 +15,9 @@ import swal from "sweetalert";
 import Select from "react-select";
 import { AuthContext } from "../../../App";
 import { Redirect } from "react-router";
+import { api } from "../../Utils/Api";
 
-const api = "http://localhost:3001";
+ 
 
 export default function BarangLama() {
   const { state } = useContext(AuthContext);

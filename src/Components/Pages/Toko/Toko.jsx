@@ -17,8 +17,9 @@ import moment from "moment";
 import { AuthContext } from "../../../App";
 import { Redirect } from "react-router";
 import ModalKeranjang from "./ModalKeranjang";
+import { api } from "../../Utils/Api";
 
-const api = "http://localhost:3001";
+ 
 
 export default function Toko() {
   const { state } = useContext(AuthContext);

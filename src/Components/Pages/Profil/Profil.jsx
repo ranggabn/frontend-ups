@@ -13,9 +13,10 @@ import {
 } from "reactstrap";
 import { AuthContext } from "../../../App";
 import { Redirect } from "react-router";
+import { api } from "../../Utils/Api";
 
 const qs = require("querystring");
-const api = "http://localhost:3001";
+ 
 
 export default function Profil() {
   const { state } = useContext(AuthContext);

@@ -12,9 +12,10 @@ import {
   Form,
 } from "reactstrap";
 import { AuthContext } from "../../../App";
+import { api } from "../../Utils/Api";
 
 const qs = require("querystring");
-const api = "http://localhost:3001";
+ 
 
 export default function Masuk(props) {
   const { dispatch } = useContext(AuthContext);
@@ -99,7 +100,6 @@ export default function Masuk(props) {
                         name="username"
                         value={data.username}
                         onChange={handleInputChange}
-                        name="username"
                         id="exampleUsername"
                         required
                       />
@@ -115,7 +115,6 @@ export default function Masuk(props) {
                         name="password"
                         value={data.password}
                         onChange={handleInputChange}
-                        name="password"
                         id="examplePassword"
                         required
                       />

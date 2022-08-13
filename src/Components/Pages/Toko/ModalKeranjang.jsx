@@ -16,8 +16,9 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import swal from "sweetalert";
 import qs from "querystring";
+import { api } from "../../Utils/Api";
 
-const api = "http://localhost:3001";
+ 
 
 export default function ModalKeranjang({
   showModal,

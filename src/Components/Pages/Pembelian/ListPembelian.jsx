@@ -5,8 +5,9 @@ import moment from "moment";
 import qs from "querystring";
 import { AuthContext } from "../../../App";
 import { Redirect } from "react-router";
+import { api } from "../../Utils/Api";
 
-const api = "http://localhost:3001";
+ 
 
 export default function ListPembelian() {
   const { state } = useContext(AuthContext);

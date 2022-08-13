@@ -13,8 +13,9 @@ import axios from "axios";
 import { useParams, Redirect } from "react-router";
 import { AuthContext } from "../../../App";
 import swal from "sweetalert";
+import { api } from "../../Utils/Api";
 
-const api = "http://localhost:3001";
+ 
 
 export default function EditBarang(props) {
   const { state } = useContext(AuthContext);

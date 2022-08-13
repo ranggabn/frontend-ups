@@ -6,8 +6,9 @@ import qs from "querystring";
 import { AuthContext } from "../../../App";
 import { Redirect } from "react-router";
 import { numberWithCommas } from "../../Utils/Koma";
+import { api } from "../../Utils/Api";
 
-const api = "http://localhost:3001";
+ 
 
 export default function ListPihutang(props) {
   const { state } = useContext(AuthContext);

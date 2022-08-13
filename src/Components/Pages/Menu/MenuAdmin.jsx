@@ -13,7 +13,7 @@ import {
 } from "reactstrap";
 import { AuthContext } from "../../../App";
 
-const NavbarComp = (props) => {
+const NavbarComp = () => {
   const { dispatch } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
 

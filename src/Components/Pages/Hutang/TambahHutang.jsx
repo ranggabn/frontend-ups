@@ -14,8 +14,9 @@ import axios from "axios";
 import swal from "sweetalert";
 import { Redirect } from "react-router";
 import { AuthContext } from "../../../App";
+import { api } from "../../Utils/Api";
 
-const api = "http://localhost:3001";
+ 
 
 export default function TambahHutang(props) {
   const { state } = useContext(AuthContext);

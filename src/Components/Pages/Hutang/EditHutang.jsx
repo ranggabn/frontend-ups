@@ -13,8 +13,9 @@ import axios from "axios";
 import { useParams, Redirect } from "react-router";
 import swal from "sweetalert";
 import { AuthContext } from "../../../App";
+import { api } from "../../Utils/Api";
 
-const api = "http://localhost:3001";
+ 
 
 export default function EditHutang(props) {
   const { state } = useContext(AuthContext);
