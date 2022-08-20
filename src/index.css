@@ -11,3 +11,31 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.title-web {
+  text-align: center;
+  align-items: center;
+}
+
+.navbar-text {
+  display: flex !important;
+}
+
+.flex-display {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+
+.over-auto {
+  overflow-x: auto;
+  min-width: 100%;
+}
+
+.table thead th {
+  vertical-align: middle !important;
+}
+
+.anticon {
+  vertical-align: 0.125em !important;
+}

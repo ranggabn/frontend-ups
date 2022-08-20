@@ -107,7 +107,7 @@ export default function ModalKeranjang({
         <Modal isOpen={showModal} toggle={toggle}>
           <ModalHeader toggle={toggle}>
             <strong>{keterangan.nama}</strong>
-            <h6>Rp. {numberWithCommasString(keterangan.jual)}</h6>
+            <p>Rp. {numberWithCommasString(keterangan.jual)}</p>
           </ModalHeader>
           <ModalBody>
             <Form>

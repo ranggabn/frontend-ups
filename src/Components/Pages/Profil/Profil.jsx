@@ -104,52 +104,40 @@ export default function Profil() {
         </Row>
         <Card className="container mt-3">
           <Row className="justify-content-md-center">
-            <Col xs={6}>
+            <Col xs={12} lg={6}>
               <Form className="mt-4" onSubmit={handleFormSubmit}>
                 <Label>Username</Label>
                 <FormGroup>
-                  <Row>
-                    <Col>
-                      <Input
-                        type="text"
-                        name="username"
-                        value={data.username}
-                        onChange={handleInputChange}
-                        id="exampleUsername"
-                        disabled
-                      />
-                    </Col>
-                  </Row>
+                  <Input
+                    type="text"
+                    name="username"
+                    value={data.username}
+                    onChange={handleInputChange}
+                    id="exampleUsername"
+                    disabled
+                  />
                 </FormGroup>
                 <Label>Password Lama</Label>
                 <FormGroup>
-                  <Row>
-                    <Col>
-                      <Input
-                        type="password"
-                        name="currpassword"
-                        value={data.currpassword}
-                        onChange={handleInputChange}
-                        id="exampleCurrpassword"
-                        required
-                      />
-                    </Col>
-                  </Row>
+                  <Input
+                    type="password"
+                    name="currpassword"
+                    value={data.currpassword}
+                    onChange={handleInputChange}
+                    id="exampleCurrpassword"
+                    required
+                  />
                 </FormGroup>
                 <Label>Password Baru</Label>
                 <FormGroup>
-                  <Row>
-                    <Col>
-                      <Input
-                        type="password"
-                        name="newpassword"
-                        value={data.newpassword}
-                        onChange={handleInputChange}
-                        id="exampleNewpassword"
-                        required
-                      />
-                    </Col>
-                  </Row>
+                  <Input
+                    type="password"
+                    name="newpassword"
+                    value={data.newpassword}
+                    onChange={handleInputChange}
+                    id="exampleNewpassword"
+                    required
+                  />
                 </FormGroup>
                 {data.successMessage && (
                   <div className="alert alert-success" role="alert">

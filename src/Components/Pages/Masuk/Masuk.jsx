@@ -89,37 +89,29 @@ export default function Masuk(props) {
         </Row>
         <Card className="container mt-3">
           <Row className="justify-content-md-center">
-            <Col xs={6}>
+            <Col xs={12} lg={6}>
               <Form className="mt-4" onSubmit={handleFormSubmit}>
                 <Label>Username</Label>
                 <FormGroup>
-                  <Row>
-                    <Col>
-                      <Input
-                        type="text"
-                        name="username"
-                        value={data.username}
-                        onChange={handleInputChange}
-                        id="exampleUsername"
-                        required
-                      />
-                    </Col>
-                  </Row>
+                  <Input
+                    type="text"
+                    name="username"
+                    value={data.username}
+                    onChange={handleInputChange}
+                    id="exampleUsername"
+                    required
+                  />
                 </FormGroup>
                 <Label>Kata Sandi</Label>
                 <FormGroup>
-                  <Row>
-                    <Col>
-                      <Input
-                        type="password"
-                        name="password"
-                        value={data.password}
-                        onChange={handleInputChange}
-                        id="examplePassword"
-                        required
-                      />
-                    </Col>
-                  </Row>
+                  <Input
+                    type="password"
+                    name="password"
+                    value={data.password}
+                    onChange={handleInputChange}
+                    id="examplePassword"
+                    required
+                  />
                 </FormGroup>
 
                 {data.errorMessage && (
@@ -127,7 +119,11 @@ export default function Masuk(props) {
                     {data.errorMessage}
                   </div>
                 )}
-                <Button color="primary" className="mb-3" disabled={data.isSubmitting}>
+                <Button
+                  color="primary"
+                  className="mb-3 mt-2"
+                  disabled={data.isSubmitting}
+                >
                   {data.isSubmitting ? "...loading" : "Masuk"}
                 </Button>
               </Form>

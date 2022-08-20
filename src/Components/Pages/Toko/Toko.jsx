@@ -10,6 +10,7 @@ import {
   Table,
   Input,
 } from "reactstrap";
+import { Pagination } from "antd";
 import axios from "axios";
 import { numberWithCommas, numberWithCommasString } from "../../Utils/Koma";
 import swal from "sweetalert";
@@ -18,8 +19,6 @@ import { AuthContext } from "../../../App";
 import { Redirect } from "react-router";
 import ModalKeranjang from "./ModalKeranjang";
 import { api } from "../../Utils/Api";
-
- 
 
 export default function Toko() {
   const { state } = useContext(AuthContext);
@@ -44,10 +43,11 @@ export default function Toko() {
   });
   const [searchTerm, setsearchTerm] = useState("");
   const toggle = () => setmodal(!modal);
+  const [currentPagination, setCurrentPagination] = useState(1);
 
   useEffect(() => {
     axios.get(api + "/tampilBarang").then((res) => {
-      setbarang(res.data.values);      
+      setbarang(res.data.values);
     });
     setdataKeranjang({
       tanggal: moment().format(),
@@ -122,7 +122,7 @@ export default function Toko() {
   tampilkeranjang.map((lb) =>
     arr.push({
       kode: lb.kode,
-      stok: lb.stok - lb.jumlah
+      stok: lb.stok - lb.jumlah,
     })
   );
   function handleSubmit(e) {
@@ -138,14 +138,14 @@ export default function Toko() {
         timer: 1200,
       })
     );
-    arr.map(arr => axios.put(api + "/ubahBarang3", arr))
+    arr.map((arr) => axios.put(api + "/ubahBarang3", arr));
     remove();
     getListKeranjang();
   }
 
   const getListKeranjang = () => {
     axios.get(api + "/tampilBarang").then((res) => {
-      setbarang(res.data.values);      
+      setbarang(res.data.values);
     });
     axios.get(api + "/tampilKeranjang").then((res) => {
       settampilkeranjang(res.data.values);
@@ -177,6 +177,8 @@ export default function Toko() {
     });
   };
 
+  const words = searchTerm.toLowerCase().split(" ");
+
   if (!state.isAuthenticated) {
     return <Redirect to="/masuk" />;
   }
@@ -192,66 +194,8 @@ export default function Toko() {
         </Row>
       </Container>
 
-      <Row className="mt-5 ml-5 mr-1">
-        <Col>
-          <hr />
-          <h4>
-            <strong>Daftar Produk</strong>
-          </h4>
-          <hr />
-          <Input
-            type="text"
-            placeholder="Search..."
-            onChange={(event) => {
-              setsearchTerm(event.target.value);
-            }}
-          />
-          <Row>
-            <Table className="table-bordered mr-3 ml-3 mt-3">
-              <thead>
-                <tr></tr>
-                <tr>
-                  <th>Kode</th>
-                  <th>Nama Barang</th>
-                  <th>Stok</th>
-                  <th>Harga Normal</th>
-                  <th>Aksi</th>
-                </tr>
-              </thead>
-              <tbody>
-                {barang
-                  .filter((barang) => {
-                    if (searchTerm === "") {
-                      return barang;
-                    } else if (
-                      barang.nama
-                        .toLowerCase()
-                        .includes(searchTerm.toLowerCase())
-                    ) {
-                      return barang;
-                    }
-                  })
-                  .map((barang) => (
-                    <tr key={barang.kode}>
-                      <td>{barang.kode}</td>
-                      <td>{barang.nama}</td>
-                      <td>{barang.stok}</td>
-                      <td>Rp. {numberWithCommas(barang.jual)}</td>
-                      <td>
-                        <Button
-                          color="primary"
-                          onClick={() => keranjang(barang.kode)}
-                        >
-                          Tambah Keranjang
-                        </Button>
-                      </td>
-                    </tr>
-                  ))}
-              </tbody>
-            </Table>
-          </Row>
-        </Col>
-        <Col md={3} className="mr-5">
+      <Row className="m-auto" style={{ justifyContent: "center" }}>
+        <Col md={3} xs={12} className="mr-2">
           <hr />
           <h4>
             <strong>Keranjang</strong>
@@ -294,10 +238,10 @@ export default function Toko() {
           <ListGroup>
             <ListGroupItem color="success">
               <Row>
-                <Col xs="4">
+                <Col md={12} xl={4}>
                   <h5>Total : </h5>
                 </Col>
-                <Col>
+                <Col md={12} xl={8}>
                   <h5>
                     {dataKeranjang.total_harga
                       ? "Rp. " +
@@ -321,6 +265,78 @@ export default function Toko() {
                 Bersihkan Keranjang
               </Button>
             </Container>
+          </Row>
+        </Col>
+        <Col md={8} xs={12}>
+          <hr />
+          <h4>
+            <strong>Daftar Produk</strong>
+          </h4>
+          <hr />
+          <Input
+            type="text"
+            placeholder="Search..."
+            onChange={(event) => {
+              setsearchTerm(event.target.value);
+            }}
+          />
+          <Row>
+            <Col xs={12} className="over-auto">
+              <Table className="table-bordered mr-3 mt-3">
+                <thead
+                  className="text-center"
+                  style={{ backgroundColor: "#DDDDDD", borderColor: "black" }}
+                >
+                  <tr>
+                    <th>Kode</th>
+                    <th>Nama Barang</th>
+                    <th>Stok</th>
+                    <th>Harga Normal</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {barang
+                    .filter((barang) => {
+                      if (searchTerm === "") {
+                        return barang;
+                      } else {
+                        return words.every((word) =>
+                          barang.nama.toLowerCase().includes(word)
+                        );
+                      }
+                    })
+                    .slice((currentPagination - 1) * 10, 10 * currentPagination)
+                    .map((barang) => (
+                      <tr key={barang.kode}>
+                        <td style={{ maxWidth: "100px" }}>{barang.kode}</td>
+                        <td>{barang.nama}</td>
+                        <td className="text-center">{barang.stok}</td>
+                        <td>Rp. {numberWithCommas(barang.jual)}</td>
+                        <td>
+                          <Button
+                            color="primary"
+                            onClick={() => keranjang(barang.kode)}
+                          >
+                            Tambah Keranjang
+                          </Button>
+                        </td>
+                      </tr>
+                    ))}
+                </tbody>
+              </Table>
+              <div style={{ marginBottom: "80px" }}>
+                <Pagination
+                  defaultCurrent={currentPagination}
+                  current={currentPagination}
+                  total={barang?.length}
+                  onShowSizeChange={(e) => console.log(e)}
+                  onChange={(e) => setCurrentPagination(e)}
+                  showSizeChanger={false}
+                  showQuickJumper
+                />
+              </div>
+            </Col>
           </Row>
         </Col>
       </Row>

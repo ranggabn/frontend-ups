@@ -1,5 +1,6 @@
 import React, {useReducer, createContext} from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import "antd/dist/antd.css";
 import ListHutang from "./Components/Pages/Hutang/ListHutang";
 import Toko from "./Components/Pages/Toko/Toko";
 import TambahHutang from "./Components/Pages/Hutang/TambahHutang";

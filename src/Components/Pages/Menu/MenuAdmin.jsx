@@ -12,6 +12,7 @@ import {
   NavbarText
 } from "reactstrap";
 import { AuthContext } from "../../../App";
+import { NavLink as RRNavLink } from "react-router-dom";
 
 const NavbarComp = () => {
   const { dispatch } = useContext(AuthContext);
@@ -22,37 +23,82 @@ const NavbarComp = () => {
     <div>
       <Navbar color="dark" dark expand="md">
         <Container>
-          <NavbarBrand href="/">UPS</NavbarBrand>
-          <NavbarBrand>|</NavbarBrand>
+          <NavbarBrand href="/">UPS </NavbarBrand>
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar>
               <NavItem>
-                <NavLink href="/toko">Kasir Normal</NavLink>
+                <NavLink tag={RRNavLink} to="/toko" activeClassName="active">
+                  Kasir Normal
+                </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/tokobengkel">Kasir Bengkel</NavLink>
+                <NavLink
+                  tag={RRNavLink}
+                  activeClassName="active"
+                  to="/tokobengkel"
+                >
+                  Kasir Bengkel
+                </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/listbarang">Barang</NavLink>
+                <NavLink
+                  tag={RRNavLink}
+                  activeClassName="active"
+                  to="/listbarang"
+                >
+                  Barang
+                </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/listhutang">Hutang</NavLink>
+                <NavLink
+                  tag={RRNavLink}
+                  activeClassName="active"
+                  to="/listhutang"
+                >
+                  Hutang
+                </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/listpihutang">Piutang</NavLink>
+                <NavLink
+                  tag={RRNavLink}
+                  activeClassName="active"
+                  to="/listpihutang"
+                >
+                  Piutang
+                </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/listjual">Penjualan</NavLink>
+                <NavLink
+                  tag={RRNavLink}
+                  activeClassName="active"
+                  to="/listjual"
+                >
+                  Penjualan
+                </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/listbeli">Pembelian</NavLink>
+                <NavLink
+                  tag={RRNavLink}
+                  activeClassName="active"
+                  to="/listbeli"
+                >
+                  Pembelian
+                </NavLink>
               </NavItem>
             </Nav>
             <NavbarText>
-            <Button className="mr-3" href="/profil">Ubah Password</Button>
-            <Button onClick={() => dispatch({ type: "LOGOUT" })} href="/masuk">Keluar</Button>
-          </NavbarText>
+              <Button className="mr-3 flex-display" href="/profil">
+                Ubah Password
+              </Button>
+              <Button
+                onClick={() => dispatch({ type: "LOGOUT" })}
+                href="/masuk"
+                className="flex-display"
+              >
+                Keluar
+              </Button>
+            </NavbarText>
           </Collapse>
         </Container>
       </Navbar>

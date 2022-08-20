@@ -20,8 +20,7 @@ const NavbarComp = () => {
     <div>
       <Navbar color="dark" dark expand="md">
         <Container>
-          <NavbarBrand href="/">UPS</NavbarBrand>
-          <NavbarBrand>|</NavbarBrand>
+          <NavbarBrand href="/">UPS </NavbarBrand>
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar>
