@@ -1,1 +1,1 @@
-export const api = "https://ups-backend.herokuapp.com";
+export const api = "https://backend-ups.vercel.app/";
